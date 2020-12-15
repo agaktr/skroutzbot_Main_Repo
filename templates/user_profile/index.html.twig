@@ -14,23 +14,26 @@
     <div id="daUserProfile" class="container margin-top-50">
         <div class="daUserIndex row col padding-bottom-30">
 
-            <h1>UserProfile index</h1>
+
             {#{{ dump(profiles_info) }}#}
             <div class="col s12 m12 l12">
+
+                <h1>UserProfile index</h1>
+
                 <table class="table" id="daUserProfileTable">
                     <thead>
                     <tr>
                         {#                <th>Id</th>#}
                         <th style="width: 100px;">ID</th>
                         <th>User</th>
-                        <th>Name</th>
+                        <th>Website</th>
                         {#                <th>CsvUrl</th>#}
-                        <th>Items Number</th>
+                        <th>Products</th>
 {#                        <th>Products</th>#}
-                        <th>Items Processed</th>
+                        <th>Processed</th>
 
                         <th>Matched</th>
-                        <th>Needs Matching</th>
+                        <th>Need Matching</th>
                         <th>No results</th>
                         <th>Fetched</th>
                         <th>Unfetched</th>
@@ -84,9 +87,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col s12 m12 l12 margin-top-50">
-                <a class="button" href="{{ path('user_profile_new') }}">Create new</a>
-            </div>
+
         </div>
     </div>
 

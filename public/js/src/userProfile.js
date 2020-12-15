@@ -1,9 +1,9 @@
 $(document).ready( function () {
 
 
-    // if ($('#daUserProfileTable').length) {
-    //     $('#daUserProfileTable').DataTable();
-    // }
+    if ($('#daUserProfileTable').length) {
+        $('#daUserProfileTable').DataTable();
+    }
 
     if ($('#showProductListTable').length) {
 
@@ -19,9 +19,9 @@ $(document).ready( function () {
             url: getUrl,
             dataType: 'json',
             success: function(result){
-                console.log(result)
+                // console.log(result)
                 $.each(result, function(key, value){
-                    // console.log(value.sku);
+
                     showProductListTableArray.push({
                         "sku":          value.sku,
                         "competitors":  value.competitors,
@@ -33,6 +33,7 @@ $(document).ready( function () {
                         "price":        value.price,
                         "update":       value.update,
                     });
+
                 });
 
                 var table = $('#showProductListTable').DataTable( {

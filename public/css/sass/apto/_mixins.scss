@@ -1,0 +1,93 @@
+/*!
+ * General Mixin Functions
+ * By APTO OE
+ */
+
+
+@mixin transform( $transform ) {
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -webkit-transform: $transform;
+  transform: $transform;
+}
+
+@mixin transition ( $transition ) {
+  -moz-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition
+}
+
+@mixin animation ( $animation ) {
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  animation: $animation;
+}
+
+@mixin responsive {
+  width:100%;
+  height:auto;
+}
+
+@mixin font-face( $font-name, $file-name, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url('../fonts/' + $file-name + '.eot');
+    src: url('../fonts/' + $file-name + '.eot?#iefix')  format('embedded-opentype'),
+    url('../fonts/' + $file-name + '.woff') format('woff'),
+    url('../fonts/' + $file-name + '.ttf')  format('truetype'),
+    url('../fonts/' + $file-name + '.svg##{$font-name}')  format('svg');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+
+@mixin grayscale( $percentage ){
+  -webkit-filter: grayscale($percentage);
+  filter: grayscale($percentage);
+}
+
+@mixin pseudo-block {
+  content: '';
+  display: block;
+  position:absolute;
+}
+
+@mixin box-shadow-1 {
+  -webkit-box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+@mixin box-shadow-1-light {
+  -webkit-box-shadow: 0 10px 27px 0 rgba(115,116,117,.18);
+  box-shadow: 0 10px 27px 0 rgba(115,116,117,.18);
+}
+
+
+@mixin mask( $image ){
+  -webkit-mask: url($image);
+  mask: url($image);
+}
+
+@mixin mask-repeat( $repeat ){
+  -webkit-mask-repeat: $repeat;
+  mask-repeat: $repeat;
+}
+
+@mixin flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+@mixin flex-center {
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}

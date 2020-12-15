@@ -1,0 +1,76 @@
+@import "colors";
+
+.color-white {
+  color:#fff;
+}
+
+.bg-steel-gray {
+  background-color:$steel-gray;
+}
+
+.color-steel-gray {
+  color:$steel-gray;
+}
+
+.bg-tree-poppy {
+  background-color:$tree-poppy;
+}
+
+.color-tree-poppy {
+  color:$tree-poppy;
+}
+
+.bg-tuna {
+  background-color:$tuna;
+}
+
+.color-tuna {
+  color:$tuna;
+}
+
+.yellowLabel {
+  color: $tree-poppy;
+}
+
+.steps {
+  background-color: $blockBg;
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14),0 1px 18px 0 rgba(0,0,0,0.12),0 3px 5px -1px rgba(0,0,0,0.3);}
+
+.stepLabel {
+  padding: 20px 10px;
+  margin: 0px;
+}
+
+.stepSubLabel {
+  padding: 0px 0px 10px 10px;
+  font-size: 0.9rem;
+  color: #525266;
+}
+
+.separator {
+  width:100%;
+  border-bottom: 4px solid $tuna;
+  margin-bottom: 20px;
+}
+
+.inputRadio {
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14),0 1px 18px 0 rgba(0,0,0,0.12),0 3px 5px -1px rgba(0,0,0,0.3);
+  background-color: $inputBg;
+  padding: 10px 0px 10px 20px;
+  color:$inputColor;
+}
+
+.inputText {
+  border:1px solid;
+  border-color:$inputBorder;
+  background-color: $inputBg;
+  color:$inputColor;
+}
+
+input[type="submit"] {
+  padding: 5px 10px;
+  border: none;
+  background-color: $tree-poppy;
+  color: $inputBg;
+}
+
