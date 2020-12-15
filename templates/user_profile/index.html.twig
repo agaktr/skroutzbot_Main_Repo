@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/admin.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div id="daUserProfile" class="container margin-top-50">
+        <div class="daUserIndex row col padding-bottom-30">
+
+            <h1>UserProfile index</h1>
+            {#{{ dump(profiles_info) }}#}
+            <div class="col s12 m12 l12">
+                <table class="table" id="daUserProfileTable">
+                    <thead>
+                    <tr>
+                        {#                <th>Id</th>#}
+                        <th style="width: 100px;">ID</th>
+                        <th>User</th>
+                        <th>Name</th>
+                        {#                <th>CsvUrl</th>#}
+                        <th>Items Number</th>
+{#                        <th>Products</th>#}
+                        <th>Items Processed</th>
+
+                        <th>Matched</th>
+                        <th>Needs Matching</th>
+                        <th>No results</th>
+                        <th>Fetched</th>
+                        <th>Unfetched</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user_profile in user_profiles %}
+                        <tr>
+                            {#                <td>{{ user_profile.id }}</td>#}
+                            <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;padding: 10px 0px;">{{ user_profile.uuid }}</td>
+                            <td>{{ profile_users[user_profile.UserUuid.toString].Username }}</td>
+                            {#                <td>{{ user_profile.CsvUrl }}</td>#}
+                            <td>{{ user_profile.Name }}</td>
+                            <td>{{ user_profile.ItemsNumber }}</td>
+{#                            <td>#}
+                                {#                    {{ user_profile.Products ? user_profile.Products|join(', ') : '' }}#}
+{#                            </td>#}
+                            <td>{{ user_profile.ItemsProcessed }}</td>
+
+                            <td>{{ profiles_info[user_profile.Uuid.toString].solo }}</td>
+                            <td>{{ profiles_info[user_profile.Uuid.toString].multiple }}</td>
+                            <td>{{ profiles_info[user_profile.Uuid.toString].empty }}</td>
+                            <td>{{ profiles_info[user_profile.Uuid.toString].fetched }}</td>
+                            <td>{{ profiles_info[user_profile.Uuid.toString].unfetched }}</td>
+                            <td>{% if user_profile.IsDone %}
+                                    {% if profiles_info[user_profile.Uuid.toString].fetched > 0 %}
+                                        <div class="statusLabel statusInProgress">In Progress...</div>
+                                    {% else %}
+                                        {% if profiles_info[user_profile.Uuid.toString].multiple > 0 %}
+                                            <div class="statusLabel statusNeedsMatching">Needs Matching</div>
+                                        {% else %}
+                                            <div class="statusLabel statusActive">Active</div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    <div class="statusInProgress">In Progress...</div>
+                                {% endif %}</td>
+                            <td>
+                                <a class="button" href="{{ path('user_profile_show', {'uuid': user_profile.uuid.toString}) }}">show</a>
+                                <a class="button" href="{{ path('user_profile_edit', {'uuid': user_profile.uuid.toString}) }}">edit</a>
+                                <a class="button" href="{{ path('user_profile_match', {'uuid': user_profile.uuid.toString}) }}">match</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col s12 m12 l12 margin-top-50">
+                <a class="button" href="{{ path('user_profile_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+{% endblock %}

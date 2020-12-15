@@ -1,0 +1,38 @@
+{
+  "name": "skroutzbot",
+  "version": "1.0.0",
+  "description": "NPM Package description",
+  "scripts": {
+    "watch": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.css",
+    "watch minify": "node-sass --watch app/Front/css/sass/base.scss app/Front/css/public.min.css --output-style compressed",
+    "compile": "node-sass  app/Front/css/sass/base.scss  app/Front/css/public.css",
+    "minify": "node-sass  app/Front/css/sass/base.scss  app/Front/css/public.min.css --output-style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aptogr/skroutzbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aptogr/skroutzbot/issues"
+  },
+  "homepage": "https://github.com/aptogr/skroutzbot#readme",
+  "dependencies": {
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "nodemon": "^1.11.0",
+    "onchange": "^6.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-livereload": "^4.0.2",
+    "gulp-load-plugins": "^2.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^2.0.0",
+    "merge-stream": "^2.0.0"
+  }
+}

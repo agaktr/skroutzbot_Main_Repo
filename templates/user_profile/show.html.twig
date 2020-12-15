@@ -1,0 +1,106 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Show UserProfile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/admin.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div id="daUserProfile" class="container margin-top-50">
+        <div class="daUserShow row col padding-bottom-30">
+
+            <div class="col s12 m12 l12">
+                <h1>UserProfile</h1>
+            </div>
+{#            {{ dump(user_profile) }}#}
+
+            <div class="col s12 m12 l12">
+                <table class="table" id="showProductListTable" data-profile="{{ user_profile.uuid.toString }}">
+                    <thead>
+                        <tr>
+                            <th>Shop Sku</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>MPN</th>
+                            <th>EAN</th>
+                            <th>Matched Product Info</th>
+                            <th>Total Competitors</th>
+                            <th>Lowest Price</th>
+                            <th>Last Update</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
+            <div class="col s12 m12 l12 margin-top-20 flex">
+
+                <button id="downloadXML" class="button" data-profile="{{ user_profile.uuid.toString }}">Download XML</button>
+                <a class="button" href="{{ path('user_profile_index') }}">Back to List</a>
+                {{ include('user_profile/_delete_form.html.twig') }}
+
+            </div>
+
+{#    <a href="{{ path('user_profile_edit', {'uuid': user_profile.uuid}) }}">edit</a>#}
+
+
+
+{#    <table class="table">#}
+{#        <tbody>#}
+{#        <tr>#}
+{#            <th>Id</th>#}
+{#            <td>{{ user_profile.id }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>Uuid</th>#}
+{#            <td>{{ user_profile.uuid }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>UserUuid</th>#}
+{#            <td>{{ user_profile.UserUuid }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>CsvUrl</th>#}
+{#            <td>{{ user_profile.CsvUrl }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>ItemsNumber</th>#}
+{#            <td>{{ user_profile.ItemsNumber }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>Products</th>#}
+{#            <td>#}
+{#                #}{#                    {{ user_profile.Products ? user_profile.Products|join(', ') : '' }}#}
+{#            </td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>ItemsProcessed</th>#}
+{#            <td>{{ user_profile.ItemsProcessed }}</td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <th>IsDone</th>#}
+{#            <td>{{ user_profile.IsDone ? 'Yes' : 'No' }}</td>#}
+{#        </tr>#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('user_profile_index') }}">back to list</a>#}
+
+{#    <a href="{{ path('user_profile_edit', {'uuid': user_profile.uuid}) }}">edit</a>#}
+
+{#    {{ include('user_profile/_delete_form.html.twig') }}#}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+{% endblock %}

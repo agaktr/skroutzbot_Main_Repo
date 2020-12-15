@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job{% endblock %}
+
+{% block body %}
+    <h1>Job</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ job.id }}</td>
+            </tr>
+            <tr>
+                <th>Uuid</th>
+                <td>{{ job.uuid }}</td>
+            </tr>
+            <tr>
+                <th>ProductUuid</th>
+                <td>{{ job.ProductUuid }}</td>
+            </tr>
+            <tr>
+                <th>Mode</th>
+                <td>{{ job.Mode }}</td>
+            </tr>
+            <tr>
+                <th>Competitors</th>
+                <td>{{ job.Competitors ? job.Competitors|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LowestPrice</th>
+                <td>{{ job.LowestPrice }}</td>
+            </tr>
+            <tr>
+                <th>Increment</th>
+                <td>{{ job.Increment }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ job.Created }}</td>
+            </tr>
+            <tr>
+                <th>LastRun</th>
+                <td>{{ job.LastRun }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('job_index') }}">back to list</a>
+
+    <a href="{{ path('job_edit', {'id': job.id}) }}">edit</a>
+
+    {{ include('job/_delete_form.html.twig') }}
+{% endblock %}

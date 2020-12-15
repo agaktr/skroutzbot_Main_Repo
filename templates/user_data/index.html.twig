@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserData index{% endblock %}
+
+{% block body %}
+    <h1>UserData index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uuid</th>
+                <th>UserUuid</th>
+                <th>ApiKey</th>
+                <th>Active</th>
+                <th>MaxRequests</th>
+                <th>CurrentRequests</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_datum in user_datas %}
+            <tr>
+                <td>{{ user_datum.id }}</td>
+                <td>{{ user_datum.uuid }}</td>
+                <td>{{ user_datum.UserUuid }}</td>
+                <td>{{ user_datum.ApiKey }}</td>
+                <td>{{ user_datum.Active ? 'Yes' : 'No' }}</td>
+                <td>{{ user_datum.MaxRequests }}</td>
+                <td>{{ user_datum.CurrentRequests }}</td>
+                <td>{{ user_datum.Updated }}</td>
+                <td>
+                    <a href="{{ path('user_data_show', {'id': user_datum.id}) }}">show</a>
+                    <a href="{{ path('user_data_edit', {'id': user_datum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_data_new') }}">Create new</a>
+{% endblock %}

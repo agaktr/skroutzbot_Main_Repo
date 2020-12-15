@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BrandNewController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/menios.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <button id="startBrain">startBrain</button>
+
+    <div class="resp" id="resp"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/menios.js') }}"></script>
+{% endblock %}

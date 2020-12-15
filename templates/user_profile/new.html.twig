@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CSV Update{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/admin.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container margin-top-50">
+        <div id="csvDiv" class="steps row col active padding-bottom-30">
+
+            <form name="uploadForm" id="uploadForm">
+                <div class="col s12 m12 l12">
+
+                    <div class="col s12 m12 l12">
+
+                        <div class="col s12 m12 l12">
+                            <h2>Όνομα προφίλ</h2>
+                        </div>
+
+                        <div class="col s12 m12 l12">
+                            <input type="text" id="userProfileInput" name="name">
+                        </div>
+
+                        <div class="col s12 m12 l12">
+                            <h2>Επιλέξτε αρχείο csv</h2>
+                        </div>
+
+                        <div class="col s12 m12 l12">
+                            <input type="file" id="csvInput" name="csvInput">
+                        </div>
+
+                    </div>
+
+                    <div class="col s12 m12 l12 margin-top-50">
+
+                        <div class="col s12 m12 l12">
+                            <h2>Επιλέξτε μαγαζιά απο την λίστα ή αφήστε κενή</h2>
+                        </div>
+
+                        <div class="col s12 m4 l4">
+
+                            <input type="text" name="searchCom" id="searchCom" placeholder="Αναζήτηση μαγαζιού">
+
+                            <table id="comTable" class="margin-top-20">
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="col s12 m8 l8">
+                            <div id="shopsChecked" class="color-white"></div>
+                            <div id="shopsCheckedList" class="flex flex-dir-row margin-top-20 row"></div>
+                        </div>
+
+                        <div class="col s12 m12 l12 margin-top-20">
+                            <input type="submit" id="csvInputSubmit" name="csvInputSubmit">
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+{% endblock %}

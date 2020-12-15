@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Price index{% endblock %}
+
+{% block body %}
+    <h1>Price index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Uuid</th>
+                <th>ProductUuid</th>
+                <th>NetPrice</th>
+                <th>ShippingCost</th>
+                <th>PaymentCost</th>
+                <th>FinalPrice</th>
+                <th>ShopUuid</th>
+                <th>Url</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for price in prices %}
+            <tr>
+                <td>{{ price.id }}</td>
+                <td>{{ price.uuid }}</td>
+                <td>{{ price.ProductUuid }}</td>
+                <td>{{ price.NetPrice }}</td>
+                <td>{{ price.ShippingCost }}</td>
+                <td>{{ price.PaymentCost }}</td>
+                <td>{{ price.FinalPrice }}</td>
+                <td>{{ price.ShopUuid }}</td>
+                <td>{{ price.Url }}</td>
+                <td>
+                    <a href="{{ path('price_show', {'id': price.id}) }}">show</a>
+                    <a href="{{ path('price_edit', {'id': price.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('price_new') }}">Create new</a>
+{% endblock %}

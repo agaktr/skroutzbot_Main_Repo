@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserData{% endblock %}
+
+{% block body %}
+    <h1>UserData</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user_datum.id }}</td>
+            </tr>
+            <tr>
+                <th>Uuid</th>
+                <td>{{ user_datum.uuid }}</td>
+            </tr>
+            <tr>
+                <th>UserUuid</th>
+                <td>{{ user_datum.UserUuid }}</td>
+            </tr>
+            <tr>
+                <th>ApiKey</th>
+                <td>{{ user_datum.ApiKey }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ user_datum.Active ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>MaxRequests</th>
+                <td>{{ user_datum.MaxRequests }}</td>
+            </tr>
+            <tr>
+                <th>CurrentRequests</th>
+                <td>{{ user_datum.CurrentRequests }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ user_datum.Updated }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_data_index') }}">back to list</a>
+
+    <a href="{{ path('user_data_edit', {'id': user_datum.id}) }}">edit</a>
+
+    {{ include('user_data/_delete_form.html.twig') }}
+{% endblock %}

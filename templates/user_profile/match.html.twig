@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit UserProfile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/admin.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div id="daUserProfile" class="container margin-top-50">
+        <div class="daUserMatch row col padding-bottom-30">
+
+            <div class="col s12 m12 l12">
+                <h1>Match products for profile: {{ user_profile.Name }}</h1>
+                {#    <p>Here duplicate matches appear and we match accordingly</p>#}
+
+
+                {#    {{ dump(user_profile) }}#}
+            </div>
+
+            <div class="col s12 m12 l12">
+                <table class="table" data-profile="{{ user_profile.uuid.toString }}">
+                    <thead>
+                    <tr>
+                        <th>Shop Sku</th>
+                        <th>Name</th>
+                        <th>MPN</th>
+                        <th>EAN</th>
+                        <th>Matched Products</th>
+                        <th>Matched Products Info</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set countItems = 0 %}
+                    {% for shopSku,data in user_profile.products %}
+
+                        {% if countItems < 10 %}
+                            {% if data.Product|length > 1 %}
+                                {% set countItems = countItems + 1 %}
+                                <tr data-sku="{{ shopSku }}">
+                                    <td>{{ shopSku }}</td>
+                                    <td>{{ data.ShopItem.Title }}</td>
+                                    <td>{{ data.ShopItem.MPN }}</td>
+                                    <td>{{ data.ShopItem.EAN }}</td>
+                                    <td>{{ data.Product|length }}</td>
+                                    <td>
+                                        {% for productUuid,productData in data.Product %}
+                                            <div class="matchListProduct flex flex-dir-row flex-center">
+                                                <div class="matchListProductImage">
+                                                    <img src="{{ productData.product.Photo }}" width="100">
+                                                </div>
+                                                <div class="matchListProductShopUrl">
+                                                    <a href="{{ productData.product.Url }}" target="_blank" data-product="{{ productUuid }}" data-product-name="{{ productData.product.Name }}">{{ productData.product.Name }}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </td>
+                                    {#                <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">{{ user_profile.uuid }}</td>#}
+                                    {#                <td>{{ profile_users[user_profile.UserUuid.toString].Username }}</td>#}
+                                    {#                #}{#                <td>{{ user_profile.CsvUrl }}</td>#}
+                                    {#                <td>{{ user_profile.ItemsNumber }}</td>#}
+                                    {#                <td>#}
+                                    {#                    #}{#                    {{ user_profile.Products ? user_profile.Products|join(', ') : '' }}#}
+                                    {#                </td>#}
+                                    {#                <td>{{ user_profile.ItemsProcessed }}</td>#}
+                                    {#                <td>{{ user_profile.IsDone ? 'Yes' : 'No' }}</td>#}
+                                    {#                <td>{{ profiles_info[user_profile.Uuid.toString].solo }}</td>#}
+                                    {#                <td>{{ profiles_info[user_profile.Uuid.toString].multiple }}</td>#}
+                                    {#                <td>{{ profiles_info[user_profile.Uuid.toString].empty }}</td>#}
+                                    {#                <td>{{ profiles_info[user_profile.Uuid.toString].fetched }}</td>#}
+                                    {#                <td>{{ profiles_info[user_profile.Uuid.toString].unfetched }}</td>#}
+                                    <td>
+                                        {#                    <a href="{{ path('user_profile_show', {'uuid': user_profile.uuid.toString}) }}">show</a>#}
+                                        {#                    <a href="{{ path('user_profile_edit', {'uuid': user_profile.uuid.toString}) }}">edit</a>#}
+                                        <a href="#" class="startMatch button">Match</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="9">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <div id="matchModal" class="modal" >
+                    <form name="matchForm" id="matchForm">
+
+                        <h2>Match <span class="itemName"></span> with product:</h2>
+
+                        <input type="hidden" name="profile" id="profile" value="">
+                        <input type="hidden" name="sku" id="sku" value="">
+                        <select name="product" id="product"></select>
+                        <button type="submit" class="button margin-top-20" id="matchSubmit">match</button>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l12 margin-top-20 flex">
+
+                    <a class="button" href="{{ path('user_profile_index') }}">Back to list</a>
+
+                    {{ include('user_profile/_delete_form.html.twig') }}
+
+            </div>
+
+
+{#    #}
+{#    {{ include('user_profile/_form.html.twig', {'button_label': 'Update'}) }}#}
+
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+{% endblock %}

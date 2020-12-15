@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BrandNewController!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/admin.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="container margin-top-50">
+
+    <div id="step1" class="steps active row col padding-bottom-30">
+
+        <div class="col s12 m12 l12">
+            <h2 id="step1Label" class="stepLabel color-white">Αναζήτηση προιόντος</h2>
+            <div class="separator"></div>
+        </div>
+
+
+
+        <div class="col s6 m6 l6">
+            <div class="inputRadio">
+                <input type="radio" id="nameRequestRadio" name="stepOneRequest" value="nameRequest">
+                <label for="nameRequestRadio" class="color-white">Αναζήτηση με όνομα προιόντος</label>
+            </div>
+        </div>
+
+        <div class="col s6 m6 l6">
+            <div class="inputRadio">
+                <input type="radio" id="urlRequestRadio" name="stepOneRequest" value="urlRequestRadio">
+                <label for="urlRequestRadio" class="color-white">Αναζήτηση με σύνδεσμο Skroutz</label>
+            </div>
+        </div>
+
+
+        <div class="col s12 m12 l12 flex flex-dir-row">
+            <h5 class="full-width color-white">Πληκτρολογίστε το όνομα του προιόντος:</h5>
+            <input type="text" id="daRequest" class="inputText col m7 l7"><br>
+            <input id="step1Submit" type="submit" class="col m4 l4" value="Επόμενο βήμα">
+        </div>
+
+    </div>
+
+
+
+    <div id="step2" class="steps row col padding-bottom-30">
+
+        <div class="col s12 m12 l12">
+
+            <h2 class="stepLabel color-white">Προιόντα του Skroutz</h2>
+            <div class="separator"></div>
+
+            <table id="productsTable" class="color-white margin-bottom-30">
+                <tbody>
+                </tbody>
+            </table>
+
+            <input id="step2Back" type="submit" value="Προηγούμενο βήμα">
+            <input id="step2Submit" type="submit" value="Επόμενο βήμα">
+
+        </div>
+
+
+    </div>
+
+    <div id="step3" class="steps row col padding-bottom-30">
+
+        <div class="col s12 m12 l12">
+            <h2 class="stepLabel color-white">Επέλεξε τον στόχο σου</h2>
+            <div class="separator"></div>
+        </div>
+
+        <div class="col s12 m4 l4">
+            <div id="productName" class="color-white"></div>
+            <p id="lowestPrice" class="color-white"></p>
+            <img id="productImage" src="" alt="" width="200px">
+        </div>
+
+        <div class="col s12 m8 l8">
+
+            <div class="col s12 m12 l12">
+
+                <div class="col s6 m6 l6">
+                    <div class="inputRadio">
+                        <input type="radio" name="shopsRadio" id="shopFirst" value="shopFirst">
+                        <label for="shopFirst">Χαμηλότερη</label>
+                    </div>
+                </div>
+
+                <div class="col s6 m6 l6">
+                    <div class="inputRadio">
+                        <input type="radio" name="shopsRadio" id="shopSelected" value="shopSelected">
+                        <label for="shopSelected">Χαμηλότερη από ανταγωνιστές</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l12 margin-top-30">
+
+                <div class="yellowLabel">
+                    Διάλεξε τους ανταγωνιστές που θες να στοχεύσεις:
+                </div>
+
+                <table id="productTable" class="margin-top-20">
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="col s12 m12 l12">
+            <input class="step3Back" type="submit" value="Προηγούμενο βήμα">
+            <input class="step3Submit" type="submit" value="Επόμενο βήμα">
+        </div>
+
+
+
+    </div>
+
+    <div id="step4" class="steps row col padding-bottom-30">
+        <div class="col s12 m12 l12">
+
+            <h2 class="stepLabel color-white">Διακύμανση τιμής προιόντος</h2>
+            <div class="stepSubLabel">Επέλεξε με ποιόν τρόπο θές να διακυμανθεί η τιμή του προιόντος</div>
+            <div class="separator"></div>
+
+            <div class="flex flex-dir-col">
+
+                <div class="col s12 m4 l4 margin-bottom-30">
+                    <label for="posostieaPrice">Πληκτρολογίστε την μέγιστη ποσοστιαία μείωση της  νέας τιμής του προιόντος σου:</label>
+                    <input type="text" id="posostieaPrice" name="posostieaPrice" class="inputText margin-top-20" required>
+                </div>
+
+                <div class="col s12 m4 l4 margin-bottom-30">
+                    <label for="elaxistiPrice">Πληκτρολογίστε την ελάχιστη τιμή που μπορεί να έχει το προιόν σου:</label>
+                    <input type="text" id="elaxistiPrice" name="elaxistiPrice" class="inputText margin-top-20" required>
+                </div>
+
+                <div class="col s12 m12 l12">
+                    <input id="step4Back" type="submit" value="Προηγούμενο βήμα">
+                    <input id="step4Submit" type="submit" value="Δες τα αποτελέσματα">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="csvDiv" class="steps row col padding-bottom-30">
+        <div class="col s12 m12 l12">
+            <div class="col s12 m12 l12">
+                <form>
+                    <input type="file" id="csvInput" name="csvInput">
+                    <input type="submit" id="csvInputSubmit" name="csvInputSubmit">
+                </form>
+            </div>
+            <div class="col s12 m12 l12 margin-top-50">
+                <div class="col s12 m4 l4">
+                    <input type="text" name="searchCom" id="searchCom">
+                    <table id="comTable" class="margin-top-20">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col s12 m8 l8">
+                    <div id="shopsChecked" class="color-white"></div>
+                    <div id="shopsCheckedList" class="flex flex-dir-row margin-top-20 row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{#    <script src="{{ asset('js/steps.js') }}"></script>#}
+    <script src="{{ asset('js/admin.min.js') }}"></script>
+{% endblock %}
