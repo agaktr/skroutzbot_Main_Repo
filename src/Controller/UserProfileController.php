@@ -112,6 +112,7 @@ class UserProfileController extends AbstractController
                 'price'=> $bestPrice->getNetPrice(),
                 'update'=> $theProduct->getUpdated()
             ];
+
 //            var_dump($shopSku);
 //            var_dump($product);
 //            die();
