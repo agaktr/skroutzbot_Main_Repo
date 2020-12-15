@@ -117,7 +117,6 @@ class UserProfileController extends AbstractController
 //            die();
 
 
-
 //            $recPrice = $bestPrice->getNetPrice() - 0.01;
 //            $track = $xml->addChild('item');
 //            $track->addChild('SKU', $shopSku);
