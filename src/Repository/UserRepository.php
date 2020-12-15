@@ -48,7 +48,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(User::class, 'p');
-        $q = 'SELECT * FROM `User` WHERE `uuid` IN ('.$queryIds.')';
+        $q = 'SELECT * FROM `user` WHERE `uuid` IN ('.$queryIds.')';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();
