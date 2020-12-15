@@ -31,7 +31,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
-        $q = 'SELECT * FROM `Product` WHERE `external_id` IN ('.$queryIds.')';
+        $q = 'SELECT * FROM `product` WHERE `external_id` IN ('.$queryIds.')';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();
@@ -48,7 +48,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
-        $q = 'SELECT * FROM `Product` WHERE `uuid` IN ('.$queryIds.')';
+        $q = 'SELECT * FROM `product` WHERE `uuid` IN ('.$queryIds.')';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();
@@ -62,7 +62,7 @@ class ProductRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Product::class, 'p');
-        $q = 'SELECT * FROM `Product` WHERE `updated` < '.$timeToSearch.' ORDER BY id ASC LIMIT 10';
+        $q = 'SELECT * FROM `product` WHERE `updated` < '.$timeToSearch.' ORDER BY id ASC LIMIT 10';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();

@@ -31,7 +31,7 @@ class ShopRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Shop::class, 's');
-        $q = 'SELECT * FROM `Shop` WHERE `external_id` IN ('.$queryIds.')';
+        $q = 'SELECT * FROM `shop` WHERE `external_id` IN ('.$queryIds.')';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();
@@ -42,7 +42,7 @@ class ShopRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Shop::class, 's');
-        $q = 'SELECT * FROM `Shop` WHERE `name` LIKE "'.$string.'%"';
+        $q = 'SELECT * FROM `shop` WHERE `name` LIKE "'.$string.'%"';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();

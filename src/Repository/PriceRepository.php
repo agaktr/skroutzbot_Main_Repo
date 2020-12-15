@@ -31,7 +31,7 @@ class PriceRepository extends ServiceEntityRepository
 
         $rsm = new ResultSetMappingBuilder($this->getEntityManager());
         $rsm->addRootEntityFromClassMetadata(Price::class, 'p');
-        $q = 'SELECT * FROM `Price` WHERE `product_uuid` IN ('.$queryIds.')';
+        $q = 'SELECT * FROM `price` WHERE `product_uuid` IN ('.$queryIds.')';
 
         $query = $this->getEntityManager()->createNativeQuery($q, $rsm);
         return $query->getResult();
