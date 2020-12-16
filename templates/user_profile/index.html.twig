@@ -18,7 +18,7 @@
             {#{{ dump(profiles_info) }}#}
             <div class="col s12 m12 l12">
 
-                <h1>UserProfile index</h1>
+                <h1>XML Profile index</h1>
 
                 <table class="table" id="daUserProfileTable">
                     <thead>
@@ -71,7 +71,7 @@
                                         {% endif %}
                                     {% endif %}
                                 {% else %}
-                                    <div class="statusInProgress">In Progress...</div>
+                                    <div class="statusLabel statusInProgress">In Progress...</div>
                                 {% endif %}</td>
                             <td>
                                 <a class="button" href="{{ path('user_profile_show', {'uuid': user_profile.uuid.toString}) }}">show</a>

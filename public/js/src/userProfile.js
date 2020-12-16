@@ -1,5 +1,11 @@
 $(document).ready( function () {
 
+    var siteUrl = 'http://192.168.1.100/skroutzbot/public/';
+
+    // console.log(window.location.href)
+    // console.log(window.location.hostname )
+    // console.log(window.location.pathname )
+    // console.log(window.location.protocol )
 
     if ($('#daUserProfileTable').length) {
         $('#daUserProfileTable').DataTable();
@@ -10,7 +16,7 @@ $(document).ready( function () {
         var url = $(location).attr('href'),
             parts = url.split("/"),
             uuid = parts[parts.length-1],
-            getUrl = "http://192.168.1.100/skroutzbot/public/user-profile/get-products?profile="+uuid;
+            getUrl = siteUrl + "user-profile/get-products?profile=" +uuid;
 
         var showProductListTableArray = [];
 
@@ -19,7 +25,7 @@ $(document).ready( function () {
             url: getUrl,
             dataType: 'json',
             success: function(result){
-                // console.log(result)
+
                 $.each(result, function(key, value){
 
                     showProductListTableArray.push({
@@ -66,32 +72,67 @@ $(document).ready( function () {
 
 });
 
-$(document).click(function(event) {
-    if (!$(event.target).closest(".modal,.startMatch").length) {
-        $('#matchModal').removeClass("active");
-    }
-});
-
-$('#matchSubmit').on( "click", function(e) {
-    $('#matchModal').removeClass("active");
-})
+// $(document).click(function(event) {
+//     if (!$(event.target).closest(".modal,.startMatch").length) {
+//         $('#matchModal').removeClass("active");
+//     }
+// });
+//
+// $('#matchSubmit').on( "click", function(e) {
+//     $('#matchModal').removeClass("active");
+// })
 
 $(".startMatch").on( "click", function(e) {
 
     e.preventDefault();
-    $('#matchModal').addClass('active');
 
-    var profile = $(this).closest('[data-profile]').attr('data-profile');
-    var sku = $(this).closest('[data-sku]').attr('data-sku');
-    var products = '';
+    var matchListProductName = $(this).parent().parent().parent().parent().parent().find('.matchListProductName').html();
+    // var matchListProductName = $(this).closest('.matchListProductName').html();
+
+    var matchListProductAnswer = window.confirm("Are you sure you want to match this item with \n"+matchListProductName+" ?");
+
+    if (matchListProductAnswer) {
+
+        // var profile = $(this).closest('[data-profile]').data('profile');
+        var sku = $(this).closest('[data-sku]').data('sku');
+        // var uuid =$(this).data('product');
+
+        // console.log('profile',profile);
+        // console.log('sku',sku);
+        // console.log('uuid',uuid);
+
+        var form = $('.matchForm').serialize();
+        // console.log(form);
+
+        $.ajax({
+            type: "POST",
+            url: siteUrl + "user-profile/match",
+            data: {
+                'match' : form
+            },
+            success: function(result){
+
+                if (result.status === 200){
+
+                    $('[data-sku='+sku+']').remove();
+                }
+                console.log(result)
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Status: " + textStatus);
+                console.log("Error: " + errorThrown);
+            }
+        });
+
+    }
 
 
-    $('#profile').val(profile);
-    $('#sku').val(sku);
-    $('#product').empty();
-    $.each($(this).closest('[data-sku]').find('[data-product]'),function () {
-        $('#product').append('<option value="'+$(this).attr('data-product')+'">'+$(this).attr('data-product-name')+'</option>');
-    });
+    // $('#profile').val(profile);
+    // $('#sku').val(sku);
+    // $('#product').empty();
+    // $.each($(this).closest('[data-sku]').find('[data-product]'),function () {
+    //     $('#product').append('<option value="'+$(this).attr('data-product')+'">'+$(this).attr('data-product-name')+'</option>');
+    // });
 });
 
 $("#matchSubmit").on( "click", function(e) {
@@ -104,7 +145,7 @@ $("#matchSubmit").on( "click", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "http://192.168.1.100/skroutzbot/public/user-profile/match",
+        url: siteUrl + "user-profile/match",
         data: {
             'match' : form
         },
@@ -134,7 +175,7 @@ $("#downloadXML").on( "click", function(e) {
 
     $.ajax({
         type: "GET",
-        url: "http://192.168.1.100/skroutzbot/public/user-profile/download",
+        url: siteUrl + "user-profile/download",
         data: {
             'profile' : profile
         },
@@ -144,7 +185,7 @@ $("#downloadXML").on( "click", function(e) {
             // If you don't know the name or want to use
             // the webserver default set name = ''
             link.setAttribute('download', result.filename.replace('uploads/generated/',''));
-            link.href = 'http://192.168.1.100/skroutzbot/public/'+result.filename;
+            link.href = siteUrl + result.filename;
             document.body.appendChild(link);
             link.click();
             link.remove();
@@ -169,7 +210,7 @@ $("#startBrain").on( "click", function(e) {
 function startBrain(){
     $.ajax({
         type: "POST",
-        url: "http://192.168.1.100/skroutzbot/public/brain/run",
+        url: siteUrl + "brain/run",
         data: {
         },
         success: function(result){

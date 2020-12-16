@@ -1,13 +1,15 @@
 
+var siteUrl = 'http://192.168.1.100/skroutzbot/public/';
+
 $("#step1Submit").on( "click", function() {
 
     var daRequest = $('#daRequest').val();
     var radioCheck = $('input[name=stepOneRequest]:checked', '#step1').val();
 
     if ( radioCheck == 'nameRequest') {
-        var url = 'http://192.168.1.100/skroutzbot/public/api/search?name='+daRequest
+        var url = siteUrl + 'api/search?name='+daRequest
     } else if (radioCheck == 'urlRequestRadio') {
-        var url = 'http://192.168.1.100/skroutzbot/public/api/search?url='+daRequest
+        var url = siteUrl + 'api/search?url='+daRequest
     }
 
     console.log(url);
@@ -58,7 +60,7 @@ var productId;
 
 $("#step2Submit").on( "click", function() {
     var radioProductCheck = $('input[name=productRadio]:checked', '#step2').val();
-    var fetchURL = 'http://192.168.1.100/skroutzbot/public/api/fetch?ids=' + radioProductCheck;
+    var fetchURL = siteUrl + 'api/fetch?ids=' + radioProductCheck;
     console.log(fetchURL);
     $("#productTable tr").remove();
     $.ajax({url: fetchURL, success: function(productResult){
@@ -105,7 +107,7 @@ $("#step4Submit").on( "click", function() {
         }
 
         $.ajax({
-            url: 'http://192.168.1.100/skroutzbot/public/api/save',
+            url: siteUrl + 'api/save',
             type: "POST",
             data: {
                 'mode':shopsRadio,
@@ -132,12 +134,12 @@ $("form#uploadForm").submit(function(e) {
     var formData = new FormData(this);
 
     $.ajax({
-        url: 'http://192.168.1.100/skroutzbot/public/user-profile/save',
+        url: siteUrl + 'user-profile/save',
         type: 'POST',
         data: formData,
         success: function (data) {
 
-            window.location.href = 'http://192.168.1.100/skroutzbot/public/user-profile';
+            window.location.href = siteUrl + 'user-profile';
         },
         cache: false,
         contentType: false,
@@ -278,7 +280,7 @@ $("#searchCom").keyup(function () {
 
         searchComRequest = $.ajax({
             type: "GET",
-            url: "http://192.168.1.100/skroutzbot/public/api/shop/suggest",
+            url: siteUrl + "api/shop/suggest",
             headers: {
                 Authorization: 'b443b7226ea805f12d25fa1a23d86c15aa434bea719d4364a35000a061a8bf18920a1cd5fd781d3bca47606d65aae05fc78d82be8f4eedfa01cd8ec5'
             },

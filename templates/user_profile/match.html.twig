@@ -17,7 +17,7 @@
                 {#    <p>Here duplicate matches appear and we match accordingly</p>#}
 
 
-                {#    {{ dump(user_profile) }}#}
+                    {{ dump(user_profile) }}
             </div>
 
             <div class="col s12 m12 l12">
@@ -26,11 +26,10 @@
                     <tr>
                         <th>Shop Sku</th>
                         <th>Name</th>
-                        <th>MPN</th>
-                        <th>EAN</th>
-                        <th>Matched Products</th>
-                        <th>Matched Products Info</th>
-                        <th>Action</th>
+{#                        <th>MPN</th>#}
+{#                        <th>EAN</th>#}
+                        <th>Possible Matches</th>
+{#                        <th>Action</th>#}
                     </tr>
                     </thead>
                     <tbody>
@@ -42,21 +41,37 @@
                                 {% set countItems = countItems + 1 %}
                                 <tr data-sku="{{ shopSku }}">
                                     <td>{{ shopSku }}</td>
-                                    <td>{{ data.ShopItem.Title }}</td>
-                                    <td>{{ data.ShopItem.MPN }}</td>
-                                    <td>{{ data.ShopItem.EAN }}</td>
-                                    <td>{{ data.Product|length }}</td>
+                                    <td class="matchListProductName">{{ data.ShopItem.Title }}</td>
+{#                                    <td>{{ data.ShopItem.MPN }}</td>#}
+{#                                    <td>{{ data.ShopItem.EAN }}</td>#}
                                     <td>
-                                        {% for productUuid,productData in data.Product %}
-                                            <div class="matchListProduct flex flex-dir-row flex-center">
-                                                <div class="matchListProductImage">
-                                                    <img src="{{ productData.product.Photo }}" width="100">
+                                        <div class="flex possible-matches flex-just-center">
+                                            {% for productUuid,productData in data.Product %}
+
+                                                <div class="matchListProduct ">
+
+                                                    <form name="matchForm" class="matchForm flex flex-dir-col flex-center">
+
+                                                        <div class="matchListProductImage flex flex-dir-col flex-just-center">
+                                                            <img src="{{ productData.product.Photo }}" width="100">
+                                                        </div>
+
+                                                        <div class="matchListProductShopUrl">
+                                                            <a href="{{ productData.product.Url }}" target="_blank">{{ productData.product.Name }}</a>
+                                                        </div>
+
+                                                        <a href="#" data-product="{{ productUuid }}" class="startMatch button margin-top-auto">Match</a>
+
+                                                        <input type="hidden" name="profile" id="profile" value="{{ user_profile.uuid.toString }}">
+                                                        <input type="hidden" name="sku" id="sku" value="{{ shopSku }}">
+                                                        <input type="hidden" name="product" id="product" value="{{ productUuid }}">
+
+                                                    </form>
+
                                                 </div>
-                                                <div class="matchListProductShopUrl">
-                                                    <a href="{{ productData.product.Url }}" target="_blank" data-product="{{ productUuid }}" data-product-name="{{ productData.product.Name }}">{{ productData.product.Name }}</a>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
+
+                                            {% endfor %}
+                                        </div>
                                     </td>
                                     {#                <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">{{ user_profile.uuid }}</td>#}
                                     {#                <td>{{ profile_users[user_profile.UserUuid.toString].Username }}</td>#}
@@ -72,11 +87,11 @@
                                     {#                <td>{{ profiles_info[user_profile.Uuid.toString].empty }}</td>#}
                                     {#                <td>{{ profiles_info[user_profile.Uuid.toString].fetched }}</td>#}
                                     {#                <td>{{ profiles_info[user_profile.Uuid.toString].unfetched }}</td>#}
-                                    <td>
-                                        {#                    <a href="{{ path('user_profile_show', {'uuid': user_profile.uuid.toString}) }}">show</a>#}
-                                        {#                    <a href="{{ path('user_profile_edit', {'uuid': user_profile.uuid.toString}) }}">edit</a>#}
-                                        <a href="#" class="startMatch button">Match</a>
-                                    </td>
+{#                                    <td>#}
+{#                                        #}{#                    <a href="{{ path('user_profile_show', {'uuid': user_profile.uuid.toString}) }}">show</a>#}
+{#                                        #}{#                    <a href="{{ path('user_profile_edit', {'uuid': user_profile.uuid.toString}) }}">edit</a>#}
+{#                                        <a href="#" class="startMatch button">Match</a>#}
+{#                                    </td>#}
                                 </tr>
                             {% endif %}
                         {% endif %}
